@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private bool bFaceRight = true;
     private bool bGrounded = false;
     private float moveforce = 50f;
+    public float jumpForce = 300;
     Transform mgroundcheck;
     public Rigidbody2D heroBody;
 
@@ -51,6 +52,17 @@ public class Player : MonoBehaviour
         else if (fInput < 0 && bFaceRight)
         {
             flip();
+        }
+        bool bjump = false;
+ //       bjump = Input.GetButton("bjump");
+        if(bGrounded)
+        {
+            bjump = Input.GetKeyDown(KeyCode.Space);
+            Vector2 upForce = new Vector2(0, 1);
+            if (bjump)
+            {
+                heroBody.AddForce(upForce * jumpForce);
+            }
         }
     }
     void flip()
