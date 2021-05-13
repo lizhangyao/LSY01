@@ -6,13 +6,14 @@ public class Player : MonoBehaviour
 {
     private float fInput = 0.0f;
     private float maxSpeed = 5;
-    private bool bFaceRight = true;
+    [HideInInspector]//关键词可隐藏共有变量
+    public bool bFaceRight = true;
     private bool bGrounded = false;
     private float moveforce = 50f;
-    public float jumpForce = 300;
+    public float jumpForce = 100;
     Transform mgroundcheck;
     public Rigidbody2D heroBody;
-
+    //[SerializeField]可显示私有变量
     // Start is called before the first frame update
     void Start()
     {
