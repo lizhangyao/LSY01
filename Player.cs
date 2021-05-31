@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public bool bFaceRight = true;
     private bool bGrounded = false;
     private float moveforce = 50f;
-    public float jumpForce = 100;
+    public float jumpForce = 350 ;
     Transform mgroundcheck;
     public Rigidbody2D heroBody;
     //[SerializeField]可显示私有变量
