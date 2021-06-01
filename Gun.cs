@@ -4,34 +4,42 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Rigidbody2D rocket;
-    public float fSpeed = 10;
-    Player playerCtrl;
+    public float speed = 20f;
+
+    private player playerCtrl;
+    private Animator anim;
+
+    // Start is called before the first frame update
     void Start()
     {
-        playerCtrl = transform.root.GetComponent<Player>();
+        
+    }
+
+    private void Awake()
+    {
+        anim = transform.root.gameObject.GetComponent<Animator>();  //transform.root返回值为transform类型
+        playerCtrl = transform.parent.GetComponent<player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Mouse0))
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown ("Fire1"))       //Input.GetKeydown(Keydown.Mouse0);  
         {
-            Vector3 direction = new Vector3(0, 0, 0);
-            if(playerCtrl.bFaceRight)
+            anim.SetTrigger("shoot");
+            GetComponent<AudioSource>().Play();
+            if (player.bFaceRight)
             {
-                Rigidbody2D RocketInstance = Instantiate(rocket, transform.position, Quaternion.Euler(direction));
-                RocketInstance.velocity = new Vector2(fSpeed, 0);
+                Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
+                bullet.velocity = new Vector2(speed, 0);
             }
             else
             {
-                direction.z = 180;
-                Rigidbody2D RocketInstance = Instantiate(rocket, transform.position, Quaternion.Euler(direction));
-                RocketInstance.velocity = new Vector2(-fSpeed, 0);
+                Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 180f))) as Rigidbody2D;
+                bullet.velocity = new Vector2(-speed, 0);
             }
         }
-
+        
     }
 }
